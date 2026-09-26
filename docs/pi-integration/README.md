@@ -1,0 +1,9 @@
+# Pi GUI work notes
+
+This directory tracks the Pi GUI fork's exploration. It is our project record, not an upstream ZCode specification. Dates in `HISTORY.csv` are local observations; verify them against the current checkout before acting on them.
+
+- [PLAN.md](PLAN.md): architecture direction, decisions, validation gates, and open questions.
+- [PROGRESS.csv](PROGRESS.csv): compact current status and next steps.
+- [HISTORY.csv](HISTORY.csv): append-only experiments, maintenance changes, and upstream-sync results.
+
+Working layout: this repository is a public fork of `zai-org/ZCode`; experimental probes live in [`scripts/pi-integration/`](../../scripts/pi-integration/). Keep upstream-specific changes as small as possible, and record evidence before claiming GUI integration is complete.

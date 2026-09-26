@@ -1,0 +1,12 @@
+date,type,result,note,ref
+2026-09-27,evaluation,done,ZCode V4 transport is a candidate Pi GUI seam,ZCode@29628c9
+2026-09-27,evaluation,done,Grok TUI is coupled to Grok Shell; excluded from Pi GUI direction,grok-build@f0e3be1
+2026-09-27,probe,pass,Pi RPC read-only turn streamed text and tool events,pi-rpc-smoke.mjs
+2026-09-27,probe,pass,Pi normal and aborted turns reached ZCode SessionDataLayer via mock transport,pi-v4-smoke.mjs
+2026-09-27,dependencies,done,Filtered dependencies installed without scripts; Node 24.11.1 differs from required 24.14.0,mise.toml
+2026-09-27,cleanup,done,Removed clean local grok-build clone,workspace
+2026-09-27,docs,done,Created root docs for plan and lightweight status/history,docs/
+2026-09-27,docs,done,Replaced verbose markdown progress and history with compact CSV,docs/
+2026-09-27,git,done,Created public GitHub fork and bound local origin to fork; upstream to source,Wha1eChai/ZCode@29628c9
+2026-09-27,git,done,Moved docs and smoke probes into fork; upstream push URL disabled locally,docs/pi-integration/
+2026-09-27,check,partial,Architecture OK and lint exit 0 with 70 warnings; typecheck exit 2 after filtered install,pnpm typecheck

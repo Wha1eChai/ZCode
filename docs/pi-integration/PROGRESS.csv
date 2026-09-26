@@ -1,0 +1,9 @@
+area,status,detail,next
+Pi RPC,verified,Live read-only turn and abort observed,Keep as regression probe
+ZCode V4 data layer,verified,Schema and SessionDataLayer accepted ephemeral Pi frames,Connect visible session
+ZCode GUI,pending,No Pi-driven page launched,Build one-workspace slice
+Durability,pending,No session reopen or reconnect tested,Design Pi session identity
+Repository,verified,Public fork Wha1eChai/ZCode; origin is fork and upstream is source,Keep changes reviewable
+Probe migration,verified,Docs and scripts now live in fork; RPC state and V4 live probes pass,Keep paths self-contained
+Typecheck,blocked,tsc -b fails with TS2307 missing @zcode/rpc after filtered install,Retry after full bootstrap
+Upstream sync,pending,No integration branch merged with upstream,Trial merge after vertical slice
