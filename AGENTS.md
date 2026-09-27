@@ -2,7 +2,7 @@
 
 - 本仓库是公开的 `Wha1eChai/ZCode` fork；`origin` 是 fork，`upstream` 是 `zai-org/ZCode`。不要向 `upstream` 推送，也不要在公开仓库提交凭据、原始会话或私有项目内容。
 - 先读 `docs/pi-integration/README.md`、`PLAN.md`、`AUDIT.md`、`PROGRESS.csv`；实验、决策和上游合并结果简记于 `HISTORY.csv`。计划中的能力不等于已经完成。
-- Pi 是执行和持久会话的事实源；现有 `scripts/pi-integration/` 仅验证 RPC→V4 数据层（单会话、内存 mock transport），**没有**接通可见 GUI、桌面 Host 或恢复。初期只做单工作区/单会话纵切，不伪装 ZCode 专属功能或逐工具审批。
+- Pi 是执行和持久会话的事实源；`packages/pi-ui/` 已接通独立的 Pi-only TS/TSX 浏览器纵切与真实 `ConversationTimeline`，但**没有**接通 ZCode Desktop Host 或持久会话恢复。`scripts/pi-integration/` 保留为早期探针，不是 GUI 运行时。初期只做单工作区/单会话纵切，不伪装 ZCode 专属功能或逐工具审批。
 - 优先将自有实现留在独立目录；改动上游核心文件时记录接入点及验证结果。定期从 `upstream/main` 普通合并，禁止覆盖历史；不要为缩小源码体积而过早删除上游模块。
 - 以下上游规则仍适用。Pi 专属实验脚本的检查范围以 `docs/pi-integration/PLAN.md` 为准；进入正式 ZCode 源码改动时遵循 spec-first、架构检查和目标验证。
 

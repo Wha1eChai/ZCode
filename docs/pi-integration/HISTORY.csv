@@ -15,3 +15,6 @@ date,type,result,note,ref
 2026-09-27,observation,partial,Idle GUI host and Pi child observed with no established TCP at sample; model turn network not captured,docs/pi-integration/ISOLATED-GUI.md
 2026-09-27,plan,proposed,Next round compares ZCode timeline leaves and Pi-owned UI without starting ZCode Host,docs/pi-integration/NEXT-ROUND-PLAN.md
 2026-09-27,course-correction,done,Discarded uncommitted mjs-served timeline experiment; plan now targets ZCode TS/TSX entrypoint,docs/pi-integration/NEXT-ROUND-PLAN.md
+2026-09-27,implementation,verified,Pi-only TS host and React/Vite client reuse ZCode ConversationTimeline with no ZCode service shims,packages/pi-ui/
+2026-09-27,browser,pass,Real Pi read-tool answer and abort; scoped icon 200; unscoped 404; 390px no overflow,docs/pi-integration/TS-SLICE.md
+2026-09-27,check,pass,Root typecheck and lint exit 0 with 70 warnings; architecture and targeted tests pass; 29.7 MB build,docs/pi-integration/TS-SLICE.md

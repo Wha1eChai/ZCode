@@ -6,6 +6,7 @@
     ".": "./src/index.ts",
     "./useTheme": "./src/useTheme.ts",
     "./conversation-share-readonly": "./src/v4/ConversationShareReadonlyTimeline.tsx",
+    "./pi-conversation-timeline": "./src/v4/PiConversationTimeline.tsx",
     "./oauth-provider-icon": "./src/lib/oauthProviderIcon.tsx",
     "./message": "./src/components/ai-elements/message.tsx",
     "./e2e-store-bridge": "./src/lib/e2eStoreBridgeBootstrap.ts",
