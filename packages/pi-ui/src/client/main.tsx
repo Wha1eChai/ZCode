@@ -216,12 +216,28 @@ function PiConversationApp() {
               {state ? `Session ${state.sessionId}` : "Connecting to local Pi session"}
             </p>
           </div>
-          <span
-            className="shrink-0 rounded-full border border-border px-2.5 py-1 text-xs text-foreground-subtle"
-            aria-live="polite"
-          >
-            {phase === "error" ? "Error" : streaming ? "Running" : "Idle"}
-          </span>
+          <div className="flex shrink-0 flex-col items-end gap-1.5">
+            <span
+              className={`rounded-full border px-2.5 py-1 text-xs ${
+                state?.toolMode === "full"
+                  ? "border-destructive/50 bg-destructive/10 text-destructive"
+                  : "border-border text-foreground-subtle"
+              }`}
+              aria-label={`Tool mode: ${state?.toolMode ?? "pending"}`}
+            >
+              {state?.toolMode === "full"
+                ? "Shell & write"
+                : state?.toolMode === "read-only"
+                  ? "Read-only tools"
+                  : "Tool mode pending"}
+            </span>
+            <span
+              className="rounded-full border border-border px-2.5 py-1 text-xs text-foreground-subtle"
+              aria-live="polite"
+            >
+              {phase === "error" ? "Error" : streaming ? "Running" : "Idle"}
+            </span>
+          </div>
         </header>
 
         {visibleError ? (
@@ -256,6 +272,25 @@ function PiConversationApp() {
             }
             bottomDock={
               <form className="mx-auto w-full max-w-4xl" onSubmit={(event) => void submit(event)}>
+                <div className="mb-3 rounded-xl border border-border bg-card px-3 py-2 text-ui-sm leading-relaxed text-foreground-subtle">
+                  <p>Anyone with this capability URL can submit prompts. Keep this URL private.</p>
+                  {state?.toolMode === "full" ? (
+                    <p className="mt-1">
+                      This mode allows shell commands and file modifications using this OS account's
+                      permissions, with no per-tool approval. Reads are not limited to the current
+                      working directory.
+                    </p>
+                  ) : state?.toolMode === "read-only" ? (
+                    <p className="mt-1">
+                      Pi's read tools can access files available to this OS account, not just this
+                      workspace; reads are not limited to the current working directory.
+                    </p>
+                  ) : (
+                    <p className="mt-1">
+                      Tool permissions will appear when host state is available.
+                    </p>
+                  )}
+                </div>
                 <label className="sr-only" htmlFor="pi-prompt">
                   Message Pi
                 </label>

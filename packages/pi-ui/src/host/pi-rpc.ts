@@ -1,6 +1,7 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { StringDecoder } from "node:string_decoder";
 import { randomUUID } from "node:crypto";
+import type { PiToolMode } from "./tool-mode.js";
 
 const MAX_RPC_LINE_BYTES = 1024 * 1024;
 const COMMAND_TIMEOUT_MS = 30_000;
@@ -27,6 +28,7 @@ export class PiRpcCommandError extends Error {
 export type PiRpcProcessOptions = {
   cliPath: string;
   cwd: string;
+  toolMode: PiToolMode;
   onEvent: (record: RpcRecord) => void;
   onFailure: () => void;
   onClose: () => void;
@@ -57,7 +59,7 @@ export class PiRpcProcess {
       "--no-context-files",
       "--no-approve",
       "--tools",
-      "read,grep,find,ls",
+      options.toolMode === "full" ? "read,grep,find,ls,bash,edit,write" : "read,grep,find,ls",
       "--offline",
     ];
     this.child = spawn(process.execPath, args, {

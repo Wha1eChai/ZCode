@@ -18,3 +18,8 @@ date,type,result,note,ref
 2026-09-27,implementation,verified,Pi-only TS host and React/Vite client reuse ZCode ConversationTimeline with no ZCode service shims,packages/pi-ui/
 2026-09-27,browser,pass,Real Pi read-tool answer and abort; scoped icon 200; unscoped 404; 390px no overflow,docs/pi-integration/TS-SLICE.md
 2026-09-27,check,pass,Root typecheck and lint exit 0 with 70 warnings; architecture and targeted tests pass; 29.7 MB build,docs/pi-integration/TS-SLICE.md
+2026-09-27,upstream-check,verified,"Remote upstream/main 29628c9acdb81b703bbd4080c207a0e7ce5e276e matches cached upstream/main and is an ancestor of main 7d28afac6194a9b33a130276480a73e63e867fe9; no new commits to merge and no merge performed",upstream/main
+2026-09-27,bundle-measurement,verified,"Client dist 1930 files / 29654245 raw bytes; first-load static JS graph 4470180 raw bytes (31 modulepreloads plus 3146232-byte entry bundle); raw output sizes, not transfer sizes",packages/pi-ui/dist/client
+2026-09-27,security-decision,recorded,"Keep the Pi GUI slice's existing read-only tool allowlist as its default; no OS sandbox; trusted-local experiment only; no filesystem isolation is claimed",docs/pi-integration/TS-SLICE.md
+2026-09-27,tool-mode-decision,implemented,"Add explicit startup-only full built-in tool mode alongside default read-only; no per-tool approval or browser mode escalation",packages/pi-ui/src/host/tool-mode.ts
+2026-09-27,tool-mode-check,pass,"16 targeted tests plus real Pi read and synthetic full-mode write; current build 29655554 raw bytes and 4471489 first-load static JS bytes",docs/pi-integration/TS-SLICE.md

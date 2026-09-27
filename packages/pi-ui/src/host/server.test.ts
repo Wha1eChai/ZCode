@@ -9,6 +9,7 @@ import { startPiHost } from "./server.js";
 const FAKE_PI_CLI = `
 const fs = require("node:fs");
 const path = require("node:path");
+fs.writeFileSync(path.join(process.cwd(), "argv.json"), JSON.stringify(process.argv.slice(2)));
 let id = 0;
 let active = false;
 let currentMessage = "";
@@ -34,6 +35,7 @@ function respondAfterRelease(command, filename) {
   check();
 }
 function handle(command) {
+  if (command.type === "bash") fs.writeFileSync(path.join(process.cwd(), "raw-bash.log"), "unexpected");
   switch (command.type) {
     case "get_state": respond(command, { sessionId: "fake-session", model: { provider: "fake", id: "fake-model" }, isStreaming: active }); break;
     case "prompt": {
@@ -199,6 +201,68 @@ async function readEvent(
   return { event: JSON.parse(jsonLine.slice(6)), remainder: data.slice(boundary + 2) };
 }
 
+test("startup tool mode is immutable, reported in state/SSE, and selects only built-in tool flags", async () => {
+  for (const entry of [
+    { toolMode: "read-only" as const, tools: "read,grep,find,ls" },
+    { toolMode: "full" as const, tools: "read,grep,find,ls,bash,edit,write" },
+  ]) {
+    const fixture = await createFixture();
+    const host = await startPiHost({
+      cliPath: fixture.cliPath,
+      clientDirectory: fixture.clientDirectory,
+      cwd: fixture.root,
+      ...(entry.toolMode === "full" ? { toolMode: entry.toolMode } : {}),
+    });
+    try {
+      const state = await (await fetch(`${host.url}state`)).json();
+      assert.equal(state.toolMode, entry.toolMode);
+      assert.deepEqual(JSON.parse(await readFile(join(fixture.root, "argv.json"), "utf8")), [
+        "--mode",
+        "rpc",
+        "--no-session",
+        "--no-extensions",
+        "--no-skills",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--no-approve",
+        "--tools",
+        entry.tools,
+        "--offline",
+      ]);
+
+      const eventsResponse = await fetch(`${host.url}events`);
+      const reader = eventsResponse.body!.getReader();
+      const initial = await readEvent(reader, "");
+      assert.equal(initial.event.state.toolMode, entry.toolMode);
+      await reader.cancel();
+
+      assert.equal((await postJson(host, "tool-mode", { toolMode: "full" })).status, 404);
+      assert.equal((await postJson(host, "bash", { command: "echo unsafe" })).status, 404);
+      assert.equal((await (await fetch(`${host.url}state`)).json()).toolMode, entry.toolMode);
+      await assert.rejects(readFile(join(fixture.root, "raw-bash.log")), { code: "ENOENT" });
+    } finally {
+      await host.close();
+      await rm(fixture.root, { recursive: true, force: true });
+    }
+  }
+
+  const fixture = await createFixture();
+  try {
+    await assert.rejects(
+      startPiHost({
+        cliPath: fixture.cliPath,
+        clientDirectory: fixture.clientDirectory,
+        cwd: fixture.root,
+        toolMode: "unsafe" as never,
+      }),
+      /Unknown Pi tool mode/,
+    );
+    await assert.rejects(readFile(join(fixture.root, "argv.json")), { code: "ENOENT" });
+  } finally {
+    await rm(fixture.root, { recursive: true, force: true });
+  }
+});
+
 test("loopback Pi host scopes static files, guards POST origin, streams projection, and stops after accepted prompt", async () => {
   const fixture = await createFixture();
   const host = await startPiHost({
@@ -245,7 +309,9 @@ test("loopback Pi host scopes static files, guards POST origin, streams projecti
       "sessionId",
       "snapshot",
       "streaming",
+      "toolMode",
     ]);
+    assert.equal(initialState.toolMode, "read-only");
     assert.equal(initialState.snapshot.sessionId, initialState.sessionId);
 
     const noOrigin = await fetch(`${host.url}stop`, {

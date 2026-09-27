@@ -12,7 +12,10 @@ export type PiHostPhase =
   | "aborted"
   | "idle";
 
+export type PiToolMode = "read-only" | "full";
+
 export interface PiViewState {
+  toolMode: PiToolMode;
   sessionId: string;
   model: string | null;
   phase: PiHostPhase;
@@ -59,6 +62,7 @@ export function parsePiViewState(value: unknown): PiViewState | null {
     typeof candidate.phase !== "string" ||
     !validPhases.includes(candidate.phase) ||
     typeof candidate.streaming !== "boolean" ||
+    (candidate.toolMode !== "read-only" && candidate.toolMode !== "full") ||
     !Number.isSafeInteger(candidate.generation) ||
     (candidate.generation as number) < 0 ||
     !snapshotResult.success ||
@@ -72,6 +76,7 @@ export function parsePiViewState(value: unknown): PiViewState | null {
     model: candidate.model,
     phase: candidate.phase as PiHostPhase,
     streaming: candidate.streaming,
+    toolMode: candidate.toolMode,
     snapshot: snapshotResult.data,
     generation: candidate.generation as number,
   };

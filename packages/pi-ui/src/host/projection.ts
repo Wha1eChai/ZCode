@@ -329,6 +329,15 @@ export class PiV4Projection {
         }
         break;
       }
+      case "tool_execution_update": {
+        if (this.settled) break;
+        const id = boundedText(event.toolCallId, 256);
+        const rowId = this.toolRows.get(id);
+        if (!id || rowId === undefined || this.finishedTools.has(id)) break;
+        const output = messageText(event.partialResult?.content).slice(0, MAX_TOOL_OUTPUT_CHARS);
+        this.upsert(rowId, { output: { text: output } });
+        break;
+      }
       case "tool_execution_end": {
         if (this.settled) break;
         const id = boundedText(event.toolCallId, 256);

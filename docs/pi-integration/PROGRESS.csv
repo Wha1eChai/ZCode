@@ -6,7 +6,8 @@ ZCode Desktop,pending,No Pi-driven ZCode Desktop launched,Do not infer Desktop b
 Durability,pending,No session reopen or reconnect tested,Design Pi session identity
 Repository,verified,Public fork Wha1eChai/ZCode; origin is fork and upstream is source,Keep changes reviewable
 Probe migration,verified,Docs and scripts now live in fork; RPC state and V4 live probes pass,Keep paths self-contained
-Typecheck,verified,Full dependency bootstrap completed; root pnpm typecheck passes,Recheck after next upstream merge
-Upstream sync,pending,No integration branch merged with upstream,Trial merge after reviewing this vertical slice
-Boundary audit,partial,Five static lanes plus idle Pi-only process/network observation; ZCode Desktop still untested,Audit actual Desktop startup before reuse
-Pi TS GUI slice,verified,Real read-tool answer and stop in browser; scoped icon 200; mobile 390px no overflow; not Desktop or persistent,Improve bundle size and test upstream merge
+Typecheck,verified,Full dependency bootstrap completed; root pnpm typecheck passes,Recheck after source changes
+Upstream status,verified,"Remote upstream/main 29628c9 matches cached ref and is ancestor of main 7d28afa; no new commits to merge and no merge performed",Recheck upstream/main before a future sync
+Boundary audit,partial,"Five static lanes plus idle Pi-only process/network observation; ZCode Desktop still untested; no filesystem isolation or full security audit claimed",Desktop behavior remains unverified
+Pi TS GUI slice,verified,"Default read-only and explicit full built-in tool modes; real Pi read and synthetic full-mode write; 390px no overflow; trusted-local only; no sandbox; not Desktop or persistent",Keep evaluation within this local single-session boundary
+Bundle evidence,verified,"Mode-enabled client dist 1930 files / 29655554 raw bytes; first-load static JS graph 4471489 bytes (31 modulepreloads plus 3147541-byte entry); not transfer sizes",Track as a performance limitation

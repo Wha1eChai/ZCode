@@ -4,6 +4,7 @@ import { realpath } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PiRpcProcess, PI_RPC_STARTUP_TIMEOUT_MS } from "./pi-rpc.js";
+import { resolvePiToolMode, type PiToolMode } from "./tool-mode.js";
 import { closePiRpc } from "./process-lifecycle.js";
 import { PiV4Projection } from "./projection.js";
 import type { ConversationSnapshot, SessionPhase } from "@zcode/shared/zcode-protocol-v4";
@@ -31,6 +32,7 @@ type HostPhase = SessionPhase | "starting" | "submitting" | "stopping" | "aborte
 type BrowserState = {
   sessionId: string;
   model: string | null;
+  toolMode: PiToolMode;
   phase: HostPhase;
   streaming: boolean;
   snapshot: ConversationSnapshot;
@@ -42,6 +44,7 @@ type ActiveAdmission = Admission & { id: number };
 export type PiHostOptions = {
   cliPath?: string;
   cwd?: string;
+  toolMode?: PiToolMode;
   clientDirectory?: string;
   port?: number;
   /** Test seam for deterministic command-ACK failures; production keeps PiRpcProcess's default. */
@@ -55,6 +58,7 @@ export type PiHostHandle = {
 };
 
 export async function startPiHost(options: PiHostOptions = {}): Promise<PiHostHandle> {
+  const toolMode = resolvePiToolMode(options.toolMode);
   const cliPath = resolvePiCliPath(options.cliPath);
   await assertPiCliReadable(cliPath);
   const clientDirectory = resolve(options.clientDirectory ?? join(PACKAGE_ROOT, "dist", "client"));
@@ -79,7 +83,15 @@ export async function startPiHost(options: PiHostOptions = {}): Promise<PiHostHa
 
   const state = (): BrowserState | null => {
     if (!rpcAvailable || !sessionId || !projection) return null;
-    return { sessionId, model, phase, streaming, snapshot: projection.snapshot, generation };
+    return {
+      sessionId,
+      model,
+      toolMode,
+      phase,
+      streaming,
+      snapshot: projection.snapshot,
+      generation,
+    };
   };
 
   const publish = (
@@ -120,6 +132,7 @@ export async function startPiHost(options: PiHostOptions = {}): Promise<PiHostHa
   child = new PiRpcProcess({
     cliPath,
     cwd: options.cwd ?? WORKSPACE_ROOT,
+    toolMode,
     onEvent(record) {
       const currentAdmission = admission;
       if (!projection || !currentAdmission || currentAdmission.terminal) return;

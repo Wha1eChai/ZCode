@@ -1,9 +1,11 @@
 import type { IncomingMessage } from "node:http";
+import type { PiToolMode } from "./tool-mode.js";
 import { json, serveStaticAsset, type HttpResponse } from "./http-utils.js";
 
 type ReadViewState = {
   sessionId: string;
   model: string | null;
+  toolMode: PiToolMode;
   phase: string;
   streaming: boolean;
   snapshot: unknown;
