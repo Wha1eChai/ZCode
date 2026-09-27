@@ -14,3 +14,4 @@ date,type,result,note,ref
 2026-09-27,probe,pass,Pi-only loopback browser entry read-only prompt and stop observed; not ZCode Desktop,scripts/pi-integration/pi-gui-check.mjs
 2026-09-27,observation,partial,Idle GUI host and Pi child observed with no established TCP at sample; model turn network not captured,docs/pi-integration/ISOLATED-GUI.md
 2026-09-27,plan,proposed,Next round compares ZCode timeline leaves and Pi-owned UI without starting ZCode Host,docs/pi-integration/NEXT-ROUND-PLAN.md
+2026-09-27,course-correction,done,Discarded uncommitted mjs-served timeline experiment; plan now targets ZCode TS/TSX entrypoint,docs/pi-integration/NEXT-ROUND-PLAN.md
