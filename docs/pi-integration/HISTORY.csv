@@ -11,3 +11,5 @@ date,type,result,note,ref
 2026-09-27,git,done,Moved docs and smoke probes into fork; upstream push URL disabled locally,docs/pi-integration/
 2026-09-27,check,partial,Architecture OK and lint exit 0 with 70 warnings; typecheck exit 2 after filtered install,pnpm typecheck
 2026-09-27,audit,static,ZCode startup is not an inert shell; Pi plugin and authority boundaries need runtime checks,docs/pi-integration/AUDIT.md
+2026-09-27,probe,pass,Pi-only loopback browser entry read-only prompt and stop observed; not ZCode Desktop,scripts/pi-integration/pi-gui-check.mjs
+2026-09-27,observation,partial,Idle GUI host and Pi child observed with no established TCP at sample; model turn network not captured,docs/pi-integration/ISOLATED-GUI.md
