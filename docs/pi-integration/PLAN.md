@@ -1,6 +1,6 @@
 # Pi GUI integration plan
 
-Status: **proposed direction**, not an approved implementation or a proven GUI integration.
+Status: **historical initial plan**. The Pi-only browser slice and dual tool modes are now verified; Desktop integration remains unimplemented. See [MASTER-PLAN.md](MASTER-PLAN.md) for the current proposed desktop integration and decision gates. The pending labels below reflect the original plan at the time it was written.
 
 ## Goal and boundaries
 

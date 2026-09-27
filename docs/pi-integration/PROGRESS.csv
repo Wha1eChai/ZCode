@@ -1,9 +1,9 @@
 area,status,detail,next
 Pi RPC,verified,Live read-only turn and abort observed,Keep as regression probe
 ZCode V4 data layer,verified,Schema and SessionDataLayer accepted ephemeral Pi frames; TS host now derives bounded V4 snapshots,Retain Pi as sole transcript owner
-Pi-only browser probe,verified,Separate loopback Node host plus Pi RPC child; browser read-only turn and HTTP stop observed,Run NEXT-ROUND-PLAN.md presentation reuse check
+Pi-only browser probe,verified,Separate loopback Node host plus Pi RPC child; browser read-only turn and HTTP stop observed,Retain as historical probe; current TS UI verified separately
 ZCode Desktop,pending,No Pi-driven ZCode Desktop launched,Do not infer Desktop behavior from standalone probe
-Durability,pending,No session reopen or reconnect tested,Design Pi session identity
+Durability,pending,Browser refresh resync tested while Host lives; persisted session reopen after Host restart untested,Define exact Pi session identity and crash recovery
 Repository,verified,Public fork Wha1eChai/ZCode; origin is fork and upstream is source,Keep changes reviewable
 Probe migration,verified,Docs and scripts now live in fork; RPC state and V4 live probes pass,Keep paths self-contained
 Typecheck,verified,Full dependency bootstrap completed; root pnpm typecheck passes,Recheck after source changes
@@ -11,3 +11,4 @@ Upstream status,verified,"Remote upstream/main 29628c9 matches cached ref and is
 Boundary audit,partial,"Five static lanes plus idle Pi-only process/network observation; ZCode Desktop still untested; no filesystem isolation or full security audit claimed",Desktop behavior remains unverified
 Pi TS GUI slice,verified,"Default read-only and explicit full built-in tool modes; real Pi read and synthetic full-mode write; 390px no overflow; trusted-local only; no sandbox; not Desktop or persistent",Keep evaluation within this local single-session boundary
 Bundle evidence,verified,"Mode-enabled client dist 1930 files / 29655554 raw bytes; first-load static JS graph 4471489 bytes (31 modulepreloads plus 3147541-byte entry); not transfer sizes",Track as a performance limitation
+Desktop integration plan,proposed,"Pi-owned Desktop composition recommended after four read-only audits; normal ZCode Host/Agent replacement remains unproven",Confirm target product then gate Desktop isolation and one-session recovery

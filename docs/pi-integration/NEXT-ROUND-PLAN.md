@@ -1,6 +1,6 @@
 # Next round: test ZCode presentation reuse with the Pi-only host
 
-Status: **implementation approach under revision**. This round ends with an evidence-backed choice of UI reuse boundary, not a claim that ZCode Desktop already runs Pi.
+Status: **historical presentation-reuse plan, completed for the Pi-only TS slice**. [TS-SLICE.md](TS-SLICE.md) records its actual result; [MASTER-PLAN.md](MASTER-PLAN.md) is the current proposed Desktop integration plan. The checks and pending prerequisites below describe the earlier round, not the current checkout.
 
 Implementation correction: use ZCode’s TypeScript/React app and build conventions for the integration. Keep `.mjs` only for bounded command-line probes; do not extend the standalone `.mjs` HTTP test server into a product entrypoint. The temporary render fixture showed `ConversationTimeline` can mount with intl and tooltip providers, but the isolated runtime page bypassed normal app styling and is not suitable as the implementation. Recheck this seam through an in-project TS/TSX entrypoint.
 
@@ -12,7 +12,7 @@ Can a Pi-specific **TypeScript/React entrypoint in the ZCode build** drive ZCode
 - **B — smaller presentation leaves:** use selected message/tool components if importing `ConversationTimeline` requires broad service providers or unrelated side effects.
 - **C — keep a Pi-owned UI:** retain the isolated page temporarily if both ZCode reuse paths require substantial edits to upstream containers or fake services.
 
-Prefer A only if its *running* import and interaction path remains narrow. Schema compatibility from `pi-v4-smoke.mjs` does not establish that A can render safely. Do not adapt all of `SessionPane` merely to avoid choosing B or C: it reads ZCode task/session/model/share services (`packages/ui/src/v4/SessionPane.tsx`).
+Prefer A only if its _running_ import and interaction path remains narrow. Schema compatibility from `pi-v4-smoke.mjs` does not establish that A can render safely. Do not adapt all of `SessionPane` merely to avoid choosing B or C: it reads ZCode task/session/model/share services (`packages/ui/src/v4/SessionPane.tsx`).
 
 ## Invariants and scope
 

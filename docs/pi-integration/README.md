@@ -2,7 +2,8 @@
 
 This directory tracks the Pi GUI fork's exploration. It is our project record, not an upstream ZCode specification. Dates in `HISTORY.csv` are local observations; verify them against the current checkout before acting on them.
 
-- [PLAN.md](PLAN.md): overall architecture direction and validation gates.
+- [MASTER-PLAN.md](MASTER-PLAN.md): current proposed Pi-owned Desktop integration route, alternatives, work packages and evidence gates.
+- [PLAN.md](PLAN.md): historical initial architecture direction and validation gates.
 - [NEXT-ROUND-PLAN.md](NEXT-ROUND-PLAN.md): presentation-reuse decision and acceptance checks.
 - [TS-SLICE.md](TS-SLICE.md): the implemented Pi-only TS/TSX slice, ownership contract and local validation.
 - [AUDIT.md](AUDIT.md): static harness/plugin boundary audit and runtime checks still needed.

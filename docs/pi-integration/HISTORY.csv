@@ -23,3 +23,4 @@ date,type,result,note,ref
 2026-09-27,security-decision,recorded,"Keep the Pi GUI slice's existing read-only tool allowlist as its default; no OS sandbox; trusted-local experiment only; no filesystem isolation is claimed",docs/pi-integration/TS-SLICE.md
 2026-09-27,tool-mode-decision,implemented,"Add explicit startup-only full built-in tool mode alongside default read-only; no per-tool approval or browser mode escalation",packages/pi-ui/src/host/tool-mode.ts
 2026-09-27,tool-mode-check,pass,"16 targeted tests plus real Pi read and synthetic full-mode write; current build 29655554 raw bytes and 4471489 first-load static JS bytes",docs/pi-integration/TS-SLICE.md
+2026-09-27,plan,proposed,"Four read-only audits support Pi-owned Desktop composition with Pi as sole agent/session authority; no Desktop implementation or incoming upstream merge verified",docs/pi-integration/MASTER-PLAN.md
