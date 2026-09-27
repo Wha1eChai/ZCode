@@ -2,7 +2,8 @@
 
 This directory tracks the Pi GUI fork's exploration. It is our project record, not an upstream ZCode specification. Dates in `HISTORY.csv` are local observations; verify them against the current checkout before acting on them.
 
-- [PLAN.md](PLAN.md): architecture direction, decisions, validation gates, and open questions.
+- [PLAN.md](PLAN.md): overall architecture direction and validation gates.
+- [NEXT-ROUND-PLAN.md](NEXT-ROUND-PLAN.md): the next presentation-reuse decision and acceptance checks.
 - [AUDIT.md](AUDIT.md): static harness/plugin boundary audit and runtime checks still needed.
 - [ISOLATED-GUI.md](ISOLATED-GUI.md): local Pi-only GUI experiment and its limits.
 - [PROGRESS.csv](PROGRESS.csv): compact current status and next steps.

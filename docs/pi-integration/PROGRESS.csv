@@ -1,7 +1,7 @@
 area,status,detail,next
 Pi RPC,verified,Live read-only turn and abort observed,Keep as regression probe
 ZCode V4 data layer,verified,Schema and SessionDataLayer accepted ephemeral Pi frames,Connect visible session
-Pi-only browser probe,verified,Separate loopback Node host plus Pi RPC child; browser read-only turn and HTTP stop observed,Decide ZCode presentation reuse seam
+Pi-only browser probe,verified,Separate loopback Node host plus Pi RPC child; browser read-only turn and HTTP stop observed,Run NEXT-ROUND-PLAN.md presentation reuse check
 ZCode Desktop,pending,No Pi-driven ZCode Desktop launched,Do not infer Desktop behavior from standalone probe
 Durability,pending,No session reopen or reconnect tested,Design Pi session identity
 Repository,verified,Public fork Wha1eChai/ZCode; origin is fork and upstream is source,Keep changes reviewable
